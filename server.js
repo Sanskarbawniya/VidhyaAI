@@ -67,12 +67,10 @@ app.use('/api/integrity/', aiLimiter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ─── DATABASE ─────────────────────────────────────────
+// Change this part
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB Atlas connected'))
-  .catch(err => {
-    console.error('❌ MongoDB connection failed:', err.message);
-    console.log('💡 Tip: Check your MONGO_URI in .env');
-  });
+  .catch(err => console.error('❌ MongoDB connection failed:', err.message));
 
 // ─── ROUTES ───────────────────────────────────────────
 app.use('/api/auth', authRoutes);
@@ -123,4 +121,4 @@ server.listen(PORT, () => {
   console.log(`   ╚══════════════════════════════════╝\n`);
 });
 
-module.exports = { app, server }; 
+module.exports = server;
